@@ -12,7 +12,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+students_count = {}
+for student in students:
+    try:
+        # Пытаемся добавить 1 к счетчику имен студентов
+        students_count[student['first_name']] += 1
+    except KeyError:
+        # Если ошибка, то это имя встречается впервые
+        students_count[student['first_name']] = 1
+for key, value in students_count.items():
+    print(f'{key}: {value}')
 
 
 # Задание 2
@@ -26,8 +35,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
-
+students_count = {}
+for student in students:
+    try:
+        # Пытаемся добавить 1 к счетчику имен студентов
+        students_count[student['first_name']] += 1
+    except KeyError:
+        # Если ошибка, то это имя встречается впервые
+        students_count[student['first_name']] = 1
+studen_name = max(students_count, key=students_count.get)
+print(f'Самое частое имя среди учеников: {studen_name}')
 
 # Задание 3
 # Есть список учеников в нескольких классах, нужно вывести самое частое имя в каждом классе.
@@ -51,7 +68,17 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+number_of_class = 0
+for class_list in school_students:
+    name_count = {}
+    number_of_class += 1
+    for student in class_list:
+        if student['first_name'] in name_count:
+            name_count[student['first_name']] += 1
+        else:
+            name_count[student['first_name']] = 1
+    student_name = max(name_count, key=name_count.get)
+    print(f' Самое частое имя в классе {number_of_class}: {student_name}')
 
 
 # Задание 4
