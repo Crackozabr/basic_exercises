@@ -28,10 +28,10 @@ is_male = {
 }
 names = ['Оля', 'Петя', 'Вася', 'Маша']
 for name in names:
-    if name in is_male.keys():
-        if is_male[name]: pol = 'мужчина' 
-        else: pol = 'женщина' 
-        print(f'{name} {pol}')
+    if name in is_male:
+        if is_male[name]: gender = 'мужчина' 
+        else: gender = 'женщина' 
+        print(f'{name} {gender}')
 
 
 # Задание 4
@@ -47,10 +47,8 @@ groups = [
     ['Оля', 'Петя', 'Гриша'],
 ]
 print(f'Всего {len(groups)} группы.')
-group_number = 0
-for group in groups:
-    group_number += 1
-    print(f'Группа {group_number}: {len(group)} ученика.')
+for i, group in enumerate(groups):
+    print(f'Группа {i + 1}: {len(groups[i])} ученика.')
 
 # Задание 5
 # Для каждой пары учеников нужно с новой строки перечислить учеников, которые в неё входят
@@ -63,7 +61,5 @@ groups = [
     ['Оля', 'Петя', 'Гриша'],
     ['Вася', 'Маша', 'Саша', 'Женя'],
 ]
-group_number = 0
-for group in groups:
-    group_number += 1
-    print(f'Группа {group_number}: {", ".join(group)}')
+for i, group in enumerate(groups):
+    print(f'Группа {i + 1}: {", ".join(group)}')
