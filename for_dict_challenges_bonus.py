@@ -66,5 +66,51 @@ def generate_chat_history():
     return messages
 
 
+def message_count_func(message_user_dict):
+    # считаем сообщения каждого пользователя и определяем того, у кого их больше всего
+    message_count_dict = {}
+    for user, messages in message_user_dict.items():
+        message_count_dict[user] = len(messages)
+    return max(message_count_dict, key=message_count_dict.get)
+
+
+def report():
+    # получаем данные истории чатов
+    chat_history = generate_chat_history()
+    message_user_dict = {}
+    reply_message_count = {}
+    # Работаем с каждым сообщением отдельно
+    for message in chat_history:
+    # Составляем словарь всех сообщений каждого пользователя
+    # Эти данные пригодятся для выполнения, как минимум, заданий 1 и 2
+        if message["sent_by"] in message_user_dict:
+            message_user_dict[message["sent_by"]].append(str(message["id"]))
+        else:
+            message_user_dict[message["sent_by"]] = [str(message["id"])]
+
+    # 2. Вывести айди пользователя, на сообщения которого больше всего отвечали.
+    # Подсчитываем количество ответов на сообщение
+        if message["reply_for"] in reply_message_count:
+            reply_message_count[message["reply_for"]] += 1
+        else:
+            reply_message_count[message["reply_for"]] = 1
+
+    # Так как у нас могут быть сообщения без ответа, удаляем из словаря их количество
+    reply_message_count.pop(None, None)
+
+    # И ищем сообщение с максимальным счетчиком ответов
+    top_reply_message = str(max(reply_message_count, key=reply_message_count.get))
+    for reply_key, reply_value in message_user_dict.items():
+        if top_reply_message in reply_value:
+            # Нужно переделать в функцию, чтобы при нахождении пользователя 
+            # сразу выкидывало из цикла.
+            # return f'Пользователь с максимальными ответами {reply_key}'
+            print(f'Пользователь с максимальными ответами {reply_key}')
+
+    # 1. Вывести айди пользователя, который написал больше всех сообщений
+    # Само нахождение в функции message_count_func
+    print(message_count_func(message_user_dict))
+
+
 if __name__ == "__main__":
-    print(generate_chat_history())
+    report()
